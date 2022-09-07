@@ -1,0 +1,24 @@
+{
+  "name": "white-matter",
+  "version": "0.1.0",
+  "description": "Parse front-matter easily",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fus1onDev/white-matter.git"
+  },
+  "keywords": [
+    "markdown",
+    "front-matter",
+    "yaml"
+  ],
+  "author": "Fus1onDev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fus1onDev/white-matter/issues"
+  },
+  "homepage": "https://github.com/Fus1onDev/white-matter#readme",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
