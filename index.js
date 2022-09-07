@@ -1,6 +1,6 @@
 const yaml = require('js-yaml');
 
-export const parse = (markdown) => {
+const matter = (markdown) => {
   const separator = '---';
   const lines = markdown.split('\n');
   if (lines[0] !== separator || lines.filter(l => l === separator).length < 2) {
@@ -19,3 +19,5 @@ export const parse = (markdown) => {
   const content = lines.slice(endSeparatorIndex + 1).join('\n').trim();
   return { content, data };
 };
+
+module.exports = matter;
