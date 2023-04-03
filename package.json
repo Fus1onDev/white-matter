@@ -2,23 +2,32 @@
   "name": "white-matter",
   "version": "0.1.0",
   "description": "Parse front-matter easily",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Fus1onDev/white-matter.git"
+    "url": "git+https://github.com/fus1ondev/white-matter.git"
   },
   "keywords": [
     "markdown",
     "front-matter",
     "yaml"
   ],
-  "author": "Fus1onDev",
+  "author": "fus1ondev",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Fus1onDev/white-matter/issues"
+    "url": "https://github.com/fus1ondev/white-matter/issues"
   },
-  "homepage": "https://github.com/Fus1onDev/white-matter#readme",
+  "homepage": "https://github.com/fus1ondev/white-matter#readme",
   "dependencies": {
     "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.5",
+    "typescript": "^5.0.3"
   }
 }
