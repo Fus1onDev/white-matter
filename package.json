@@ -1,7 +1,7 @@
 {
   "name": "white-matter",
   "version": "0.1.0",
-  "description": "Parse front-matter easily",
+  "description": "YAML front matter parser which is an alternative to gray-matter",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
