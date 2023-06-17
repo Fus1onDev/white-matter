@@ -1,6 +1,12 @@
 import yaml from 'js-yaml';
 
-const matter = (markdown: string) => {
+/**
+  * Extracts the front matter and content from a markdown string.
+  *
+  * @param {string} markdown Markdown string to parse.
+  * @returns {{ content: string, data: unknown }} The markdown content and the front matter data.
+  */
+const matter = (markdown: string): { content: string; data: unknown; } => {
   const separator = '---';
   const lines = markdown.split('\n');
 
@@ -13,7 +19,7 @@ const matter = (markdown: string) => {
   const frontMatter = lines.slice(1, endSeparatorIndex).join('\n');
 
   // If the front matter is not valid YAML, return undefined as data
-  let data: any;
+  let data: unknown;
   try {
     data = yaml.load(frontMatter);
   } catch (err) {
