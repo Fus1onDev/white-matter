@@ -7,28 +7,64 @@ import yaml from 'js-yaml';
   * @returns {{ content: string, data: unknown }} The markdown content and the front matter data.
   */
 const matter = (markdown: string): { content: string; data: unknown; } => {
-  const separator = '---';
-  const lines = markdown.split('\n');
-
-  // If the format is invalid, return the whole markdown as content
-  if (lines[0] !== separator || lines.filter(l => l === separator).length < 2) {
+  // If the markdown is empty, return empty content and undefined data
+  if (markdown === '') {
     return { content: markdown, data: undefined };
   }
-  
-  const endSeparatorIndex = lines.slice(1).indexOf(separator) + 1;
-  const frontMatter = lines.slice(1, endSeparatorIndex).join('\n');
 
-  // If the front matter is not valid YAML, return undefined as data
+  const cached = matter.cache[markdown];
+  if (cached) {
+    return cached;
+  } else {
+    const parsed = parseMatter(markdown);
+    matter.cache[markdown] = parsed;
+    return parsed;
+  }
+};
+
+const parseMatter = (markdown: string): { content: string; data: unknown; } => {
+  const open = '---';
+  const close = '\n' + open;
+
+  // If there's no front matter, return the original markdown and undefined data
+  if (!markdown.startsWith(open) || markdown.charAt(open.length) !== '\n') {
+    return { content: markdown, data: undefined };
+  }
+
+  const str = markdown.slice(open.length);
+  const len = str.length;
+  let closeIndex = str.indexOf(close);
+  if (closeIndex === -1) {
+    closeIndex = len;
+  }
+  const frontMatter = str.slice(0, closeIndex);
+
+  const block = frontMatter.replace(/^\s*#[^\n]+/gm, '').trim();
+  if (block === '') {
+    return { content: markdown, data: undefined };
+  }
+
   let data: unknown;
   try {
     data = yaml.load(frontMatter);
   } catch (err) {
-    console.log(err);
     data = undefined;
   }
 
-  const content = lines.slice(endSeparatorIndex + 1).join('\n').trim();
+  let content = '';
+  if (closeIndex !== len) {
+    content = str.slice(closeIndex + close.length);
+    if (content[0] === '\r') {
+      content = content.slice(1);
+    }
+    if (content[0] === '\n') {
+      content = content.slice(1);
+    }
+  }
+
   return { content, data };
 };
+
+matter.cache = {} as { [key: string]: { content: string; data: unknown; }; };
 
 export default matter;
