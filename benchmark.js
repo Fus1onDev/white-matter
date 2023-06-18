@@ -1,7 +1,6 @@
 const { Suite } = require('benchmark')
 const grayMatter = require('gray-matter')
 const whiteMatter = require('./dist').default
-const jsYaml = require('js-yaml')
 
 const suite = new Suite()
 
