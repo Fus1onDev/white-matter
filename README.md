@@ -23,3 +23,15 @@ console.log(matter('---\ntitle: Front Matter\n---\nThis is content.'));
 
 // -> { content: 'This is content.', data: { title: 'Front Matter' } }
 ```
+
+## Benchmark
+
+```
+gray-matter x 573,338 ops/sec ±1.34% (84 runs sampled)
+white-matter x 795,682,710 ops/sec ±0.56% (86 runs sampled)
+Fastest is white-matter
+```
+
+## License
+
+MIT
